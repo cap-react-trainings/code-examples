@@ -1,53 +1,62 @@
 import { Book } from "../../testData/Booklist";
+import styled from "styled-components";
 
 interface Props {
   book: Book;
 }
+
+const StyledBookContainer = styled.div`
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  justify-content: space-between;
+`;
+
+const StyledBookContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 1rem;
+`;
+
+const StyledCaption = styled.p`
+  margin-bottom: 8px;
+  color: #757575;
+  font-size: 0.8rem;
+`;
+
+const StyledLabel = styled.div`
+  background-color: #ef5350;
+  padding: 8px;
+  height: 25px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+`;
+
+/**
+ * hint: take a look at the class names in dev tools
+ */
 
 const BookItem: React.FC<Props> = ({ book }: Props) => {
   /**
    * styling can be ignored for the moment, will be covered later on
    */
   return (
-    <div
-      style={{
-        borderBottom: "1px solid #ccc",
-        display: "flex",
-        justifyContent: "space-between",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          margin: "1rem",
-        }}
-      >
+    <StyledBookContainer>
+      <StyledBookContent>
         <h2>{book.title}</h2>
         <p>Author: {book.author}</p>
-        <p style={{ marginBottom: 2, color: "#757575", fontSize: "12px" }}>
-          release date: {book.releaseDate}
-        </p>
-      </div>
+        <StyledCaption>release date: {book.releaseDate}</StyledCaption>
+      </StyledBookContent>
       {!book.inStore && (
-        <div
-          style={{
-            backgroundColor: "#ef5350",
-            padding: "8px",
-            height: "25px",
-            marginTop: "16px",
-            display: "flex",
-            alignItems: "center",
-            borderRadius: "8px",
-          }}
-        >
+        <StyledLabel>
           <p style={{ color: "#fff", fontSize: "12px" }}>
             currently not available
           </p>
-        </div>
+        </StyledLabel>
       )}
-    </div>
+    </StyledBookContainer>
   );
 };
 
