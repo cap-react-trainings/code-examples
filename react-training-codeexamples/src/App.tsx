@@ -1,11 +1,24 @@
+import { Box, Typography } from "@mui/material";
 import "./App.css";
-import Book from "./components/book/Book";
+import BookItem from "./components/book/Book";
+import { books } from "./testData/Booklist";
 
 function App() {
   return (
     <div className="App">
-      <h1>Booklist</h1>
-      <Book />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <div>
+          <Typography variant="h2">Booklist</Typography>
+          {books.map((book) => (
+            <BookItem book={book} />
+          ))}
+        </div>
+      </Box>
     </div>
   );
 }
