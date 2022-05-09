@@ -14,8 +14,8 @@ function App() {
       >
         <div>
           <Typography variant="h2">Booklist</Typography>
-          {books.map((book) => (
-            <BookItem book={book} />
+          {books.map((book, index) => (
+            <BookItem book={book} key={index} />
           ))}
         </div>
       </Box>
