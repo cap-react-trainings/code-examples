@@ -13,8 +13,8 @@ function App() {
       >
         <div>
           <h1>Booklist</h1>
-          {books.map((book) => (
-            <BookItem book={book} />
+          {books.map((book, index) => (
+            <BookItem book={book} key={index} />
           ))}
         </div>
       </div>
