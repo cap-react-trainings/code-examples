@@ -1,4 +1,3 @@
-import { Box, Typography } from "@mui/material";
 import { Book } from "../../testData/Booklist";
 
 interface Props {
@@ -10,45 +9,45 @@ const BookItem: React.FC<Props> = ({ book }: Props) => {
    * styling can be ignored for the moment, will be covered later on
    */
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         borderBottom: "1px solid #ccc",
         display: "flex",
         justifyContent: "space-between",
       }}
     >
-      <Box
-        sx={{
+      <div
+        style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
-          m: "1rem",
+          margin: "1rem",
         }}
       >
-        <Typography variant="h5">{book.title}</Typography>
-        <Typography variant="body1">Author: {book.author}</Typography>
-        <Typography variant="caption" sx={{ mb: 2, color: "#757575" }}>
+        <h2>{book.title}</h2>
+        <p>Author: {book.author}</p>
+        <p style={{ marginBottom: 2, color: "#757575", fontSize: "12px" }}>
           release date: {book.releaseDate}
-        </Typography>
-      </Box>
+        </p>
+      </div>
       {!book.inStore && (
-        <Box
-          sx={{
-            bgcolor: "#ef5350",
-            p: 2,
-            height: 5,
-            mt: 2,
+        <div
+          style={{
+            backgroundColor: "#ef5350",
+            padding: "8px",
+            height: "25px",
+            marginTop: "16px",
             display: "flex",
             alignItems: "center",
-            borderRadius: 2,
+            borderRadius: "8px",
           }}
         >
-          <Typography variant="caption" sx={{ color: "#fff" }}>
+          <p style={{ color: "#fff", fontSize: "12px" }}>
             currently not available
-          </Typography>
-        </Box>
+          </p>
+        </div>
       )}
-    </Box>
+    </div>
   );
 };
 
