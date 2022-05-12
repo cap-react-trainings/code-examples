@@ -19,3 +19,9 @@ Let's get rid of our dummy data.
 3) Change the condition of labelling: If a book's price is less than 30$ label it as cheap, else as expensive
 4) Add a Loading-Component to the app that should be displayed as long as the data is being fetched
 5) Add an Error-Component that is displayed in case of no books
+
+### useQuery - hook
+1) Refactor the app a little bit: Move all the stuff we're currently rendering inside App.tsx to a sepearte component, e.g. BookList
+2) Install react-query and initialize a new QueryClient
+3) Replace our useEffect-hook with the the fetch function by react-query
+4) Loading & error state should also be retrieved from useQuery hook now
