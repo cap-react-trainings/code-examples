@@ -35,4 +35,11 @@ export const books: Book[] = [
     releaseDate: "1997",
     inStore: true,
   },
+  {
+    id: 5,
+    title: "Hamlet",
+    author: "William Shakespeare",
+    releaseDate: "1603",
+    inStore: false,
+  },
 ];
