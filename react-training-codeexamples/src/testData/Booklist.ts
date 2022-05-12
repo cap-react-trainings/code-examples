@@ -1,10 +1,11 @@
+/*
 export interface Book {
-  id: number;
   title: string;
   author: string;
   releaseDate: string;
   inStore: boolean;
 }
+
 
 export const books: Book[] = [
   {
@@ -43,3 +44,4 @@ export const books: Book[] = [
     inStore: false,
   },
 ];
+ */

@@ -23,7 +23,7 @@ export const BookSlider: React.FC<Props> = ({
           color: "#66bb6a",
         }}
         aria-labelledby="sliderlabel"
-        defaultValue={Math.round(numberOfBooks / 2)}
+        defaultValue={numberOfBooks}
         getAriaValueText={(value: number) => value.toString() + " books"}
         onChange={onSlide}
         step={1}

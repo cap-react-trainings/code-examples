@@ -1,14 +1,33 @@
 import { Box, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import BookItem from "./components/book/Book";
+import LoadingWrapper from "./components/loading-wrapper/LoadingWrapper";
 import BookSlider from "./components/slider/BookSlider";
-import { books } from "./testData/Booklist";
+
+export interface Book {
+  title: string;
+  subtitle: string;
+  isbn13: string;
+  price: string;
+  image: string;
+  url: string;
+}
 
 function App() {
-  const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState(
-    Math.round(books.length / 2)
-  );
+  const [books, setBooks] = useState<Book[]>();
+  const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("https://api.itbook.store/1.0/new")
+      .then((response) => response.json())
+      .then((data) => {
+        setBooks(data.books);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <div className="App">
@@ -24,17 +43,32 @@ function App() {
         <Typography variant="h2" sx={{ mb: 4 }}>
           Booklist
         </Typography>
-        <Box sx={{ mt: 2 }}>
-          <BookSlider
-            numberOfBooks={books.length}
-            onSliderChange={(value: number) => setSelectedNumberOfBooks(value)}
-          />
-        </Box>
-        <Box sx={{ mt: 4 }}>
-          {books.slice(0, selectedNumberOfBooks).map((book, index) => (
-            <BookItem book={book} key={index} />
-          ))}
-        </Box>
+        <LoadingWrapper loading={loading}>
+          {books && (
+            <>
+              <Box sx={{ mt: 2 }}>
+                <BookSlider
+                  numberOfBooks={books.length}
+                  onSliderChange={(value: number) =>
+                    setSelectedNumberOfBooks(value)
+                  }
+                />
+              </Box>
+              <Box sx={{ mt: 4 }}>
+                {books.slice(0, selectedNumberOfBooks).map((book, index) => (
+                  <BookItem book={book} key={index} />
+                ))}
+              </Box>
+            </>
+          )}
+          {!books && (
+            <Box>
+              <Typography variant="body1" sx={{ mb: 4 }}>
+                Sorry, we couldn't find any books to display! 😞
+              </Typography>
+            </Box>
+          )}
+        </LoadingWrapper>
       </Box>
     </div>
   );
