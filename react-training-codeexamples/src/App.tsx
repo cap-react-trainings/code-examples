@@ -1,12 +1,12 @@
 import "./App.css";
 import Book from "./components/book/Book";
-import { bookExamples } from "./testData/books";
+import { books } from "./testData/books";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{ margin: "0 auto", width: "50vw" }}>
       <h1>Booklist</h1>
-      {bookExamples.map((book) => (
+      {books.map((book) => (
         <Book book={book} />
       ))}
     </div>

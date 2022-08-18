@@ -1,19 +1,38 @@
-import { BookInterface } from "../components/book/Book";
+export interface Book {
+  id: number;
+  title: string;
+  author: string;
+  releaseDate: string;
+  inStore: boolean;
+}
 
-export const bookExamples: BookInterface[] = [
+export const books: Book[] = [
   {
+    id: 1,
     title: "Moby Dick",
     author: "Herman Melville",
     releaseDate: "1851",
+    inStore: true,
   },
   {
+    id: 2,
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
+    releaseDate: "1925",
+    inStore: false,
+  },
+  {
+    id: 3,
     title: "The Hobbit",
-    author: "J. R. R. Tolien",
-    releaseDate: "21.09.1937",
+    author: "J. R. R. Tolkien",
+    releaseDate: "1937",
+    inStore: true,
   },
   {
-    title: "The NeverEnding Story",
-    author: "Michael Ende",
-    releaseDate: "06.04.1984",
+    id: 4,
+    title: "Harry Potter and the Sorcerer's Stone",
+    author: "J. K. Rowling",
+    releaseDate: "1997",
+    inStore: true,
   },
 ];

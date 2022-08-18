@@ -1,21 +1,34 @@
-export interface BookInterface {
-  title: string;
-  author: string;
-  releaseDate: string;
-}
+import { Book } from "../../testData/books";
 
 interface Props {
-  book: BookInterface;
+  book: Book;
 }
 
-const Book: React.FC<Props> = (props: Props) => {
+const BookItem: React.FC<Props> = ({ book }: Props) => {
   return (
-    <div>
-      <h2>{props.book.title}</h2>
-      <p>Author: {props.book.author}</p>
-      <p>Release Date: |{props.book.releaseDate}</p>
+    <div
+      style={{
+        borderBottom: "1px solid #ccc",
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          margin: "1rem",
+        }}
+      >
+        <h2>{book.title}</h2>
+        <p>Author: {book.author}</p>
+        <p style={{ marginBottom: 2, color: "#757575", fontSize: "12px" }}>
+          release date: {book.releaseDate}
+        </p>
+      </div>
     </div>
   );
 };
 
-export default Book;
+export default BookItem;
