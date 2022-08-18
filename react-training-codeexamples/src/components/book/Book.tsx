@@ -5,9 +5,6 @@ interface Props {
 }
 
 const BookItem: React.FC<Props> = ({ book }: Props) => {
-  /**
-   * styling can be ignored for the moment, will be covered later on
-   */
   return (
     <div
       style={{
