@@ -1,9 +1,19 @@
-const Book: React.FC = () => {
+export interface BookInterface {
+  title: string;
+  author: string;
+  releaseDate: string;
+}
+
+interface Props {
+  book: BookInterface;
+}
+
+const Book: React.FC<Props> = (props: Props) => {
   return (
     <div>
-      <h2>Moby Dick</h2>
-      <p>Author: Herman Melville</p>
-      <p>Release Date: 1851</p>
+      <h2>{props.book.title}</h2>
+      <p>Author: {props.book.author}</p>
+      <p>Release Date: |{props.book.releaseDate}</p>
     </div>
   );
 };
