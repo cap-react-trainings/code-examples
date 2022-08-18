@@ -14,9 +14,11 @@ function App() {
       <StyledContainer>
         <div>
           <h1>Booklist</h1>
-          {books.map((book, index) => (
-            <BookItem book={book} key={index} />
-          ))}
+          {!!books.length ? (
+            books.map((book, index) => <BookItem book={book} key={index} />)
+          ) : (
+            <p>no books available 😢 </p>
+          )}
         </div>
       </StyledContainer>
     </div>
