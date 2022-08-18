@@ -23,7 +23,9 @@ const BookItem: React.FC<Props> = ({ book }: Props) => {
           m: "1rem",
         }}
       >
-        <Typography variant="h5">{book.title}</Typography>
+        <Typography variant="h5" sx={{ textAlign: "start" }}>
+          {book.title}
+        </Typography>
         <Typography variant="body1">Subtitle: {book.subtitle}</Typography>
         <Typography variant="body1">Price: {book.price}</Typography>
         <Typography variant="caption" sx={{ mb: 2, color: "#757575" }}>
