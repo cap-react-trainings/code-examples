@@ -1,6 +1,13 @@
 import "./App.css";
 import BookItem from "./components/book/Book";
+// import { Book } from "./testData/Booklist";
 import { books } from "./testData/Booklist";
+
+/**
+ * in case you would like to test the rendered ui when the booklist is empty, uncomment the comments ;)
+ */
+
+//const books: Book[] = [];
 
 function App() {
   return (
@@ -13,9 +20,11 @@ function App() {
       >
         <div>
           <h1>Booklist</h1>
-          {books.map((book, index) => (
-            <BookItem book={book} key={index} />
-          ))}
+          {!!books.length ? (
+            books.map((book, index) => <BookItem book={book} key={index} />)
+          ) : (
+            <p>no books available 😢 </p>
+          )}
         </div>
       </div>
     </div>
