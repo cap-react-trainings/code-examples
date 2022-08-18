@@ -14,9 +14,11 @@ function App() {
       >
         <div>
           <Typography variant="h2">Booklist</Typography>
-          {books.map((book, index) => (
-            <BookItem book={book} key={index} />
-          ))}
+          {!!books.length ? (
+            books.map((book, index) => <BookItem book={book} key={index} />)
+          ) : (
+            <Typography variant="body1">no books available 😢 </Typography>
+          )}
         </div>
       </Box>
     </div>
