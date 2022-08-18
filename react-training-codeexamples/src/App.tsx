@@ -1,15 +1,13 @@
+import { useState } from "react";
 import "./App.css";
 import BookItem from "./components/book/Book";
-// import { Book } from "./testData/Booklist";
+import BookSlider from "./components/slider/BookSlider";
 import { books } from "./testData/Booklist";
 
-/**
- * in case you would like to test the rendered ui when the booklist is empty, uncomment the comments ;)
- */
-
-//const books: Book[] = [];
-
 function App() {
+  const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState(
+    Math.round(books.length / 2)
+  );
   return (
     <div className="App">
       <div
@@ -18,10 +16,20 @@ function App() {
           justifyContent: "center",
         }}
       >
-        <div>
-          <h1>Booklist</h1>
+        <div style={{ width: "50vw" }}>
+          <h1 style={{ marginBottom: 12 }}>Booklist</h1>
+          <div style={{ marginTop: 12 }}>
+            <BookSlider
+              numberOfBooks={books.length}
+              onSliderChange={(value: number) =>
+                setSelectedNumberOfBooks(value)
+              }
+            />
+          </div>
           {!!books.length ? (
-            books.map((book, index) => <BookItem book={book} key={index} />)
+            books
+              .slice(0, selectedNumberOfBooks)
+              .map((book, index) => <BookItem book={book} key={index} />)
           ) : (
             <p>no books available 😢 </p>
           )}
