@@ -1,10 +1,11 @@
-import { Book } from "../../testData/Booklist";
+import { Book } from "../../App";
 
 interface Props {
   book: Book;
 }
 
 const BookItem: React.FC<Props> = ({ book }: Props) => {
+  const isCheap = parseFloat(book.price.substring(1, book.price.length)) < 30;
   return (
     <div
       style={{
@@ -22,12 +23,13 @@ const BookItem: React.FC<Props> = ({ book }: Props) => {
         }}
       >
         <h2>{book.title}</h2>
-        <p>Author: {book.author}</p>
-        <p style={{ marginBottom: 2, color: "#757575", fontSize: "12px" }}>
-          release date: {book.releaseDate}
-        </p>
+        {book.subtitle && <p>Subtitle: {book.subtitle}</p>}
+        <p>Price: {book.price}</p>
+        <a href={book.url} target="_blank">
+          See book in store
+        </a>
       </div>
-      {!book.inStore && (
+      {!isCheap ? (
         <div
           style={{
             backgroundColor: "#ef5350",
@@ -36,12 +38,24 @@ const BookItem: React.FC<Props> = ({ book }: Props) => {
             marginTop: "16px",
             display: "flex",
             alignItems: "center",
-            borderRadius: "8px",
+            borderRadius: "2px",
           }}
         >
-          <p style={{ color: "#fff", fontSize: "12px" }}>
-            currently not available
-          </p>
+          <p style={{ color: "#fff", fontSize: "12px" }}>expensive</p>
+        </div>
+      ) : (
+        <div
+          style={{
+            backgroundColor: "#66bb6a",
+            padding: "8px",
+            height: "25px",
+            marginTop: "16px",
+            display: "flex",
+            alignItems: "center",
+            borderRadius: "2px",
+          }}
+        >
+          <p style={{ color: "#fff", fontSize: "12px" }}>cheap</p>
         </div>
       )}
     </div>
