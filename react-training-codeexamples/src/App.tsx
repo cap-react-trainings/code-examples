@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App" style={{ margin: "0 auto", width: "50vw" }}>
       <h1>Booklist</h1>
-      {books.map((book) => (
-        <Book book={book} />
+      {books.map((book, index) => (
+        <Book book={book} key={index} />
       ))}
     </div>
   );
