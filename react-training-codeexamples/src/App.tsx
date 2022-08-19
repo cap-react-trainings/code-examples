@@ -1,4 +1,6 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import BookDetail from "./components/book/BookDetail";
 import BookList from "./components/book/BookList";
 
 function App() {
@@ -10,7 +12,12 @@ function App() {
                     justifyContent: "center",
                 }}
             >
-                <BookList />
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<BookList />} />
+                        <Route path="/detail/:id" element={<BookDetail />} />
+                    </Routes>
+                </BrowserRouter>
             </div>
         </div>
     );
