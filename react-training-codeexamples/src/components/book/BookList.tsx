@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { DarkModeContext } from "../../App";
 import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
 import BookSlider from "../slider/BookSlider";
 import BookItem from "./Book";
@@ -15,6 +16,7 @@ export interface Book {
 interface BookListProps {}
 
 const BookList: React.FC<BookListProps> = (props: BookListProps) => {
+    const isDarkModeEnabled = useContext(DarkModeContext);
     const [books, setBooks] = useState<Book[]>();
     const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
     const [loading, setLoading] = useState(true);
@@ -30,7 +32,12 @@ const BookList: React.FC<BookListProps> = (props: BookListProps) => {
     }, []);
 
     return (
-        <div style={{ width: "50vw" }}>
+        <div
+            style={{
+                width: "50vw",
+                color: isDarkModeEnabled ? "white" : "black",
+            }}
+        >
             <h1 style={{ marginBottom: 12 }}>Booklist</h1>
             <div style={{ marginTop: 12 }}>
                 <LoadingWrapper loading={loading}>
