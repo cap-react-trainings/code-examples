@@ -16,7 +16,7 @@ export interface Book {
 interface BookListProps {}
 
 const BookList: React.FC<BookListProps> = (props: BookListProps) => {
-    const isDarkModeEnabled = useContext(DarkModeContext);
+    const { isDarkModeEnabled, toggleDarkMode } = useContext(DarkModeContext);
     const [books, setBooks] = useState<Book[]>();
     const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
     const [loading, setLoading] = useState(true);
@@ -39,6 +39,7 @@ const BookList: React.FC<BookListProps> = (props: BookListProps) => {
             }}
         >
             <h1 style={{ marginBottom: 12 }}>Booklist</h1>
+            <button onClick={() => toggleDarkMode()}>Switch Mode</button>
             <div style={{ marginTop: 12 }}>
                 <LoadingWrapper loading={loading}>
                     {books && (

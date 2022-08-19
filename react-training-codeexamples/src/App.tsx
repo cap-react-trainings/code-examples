@@ -5,14 +5,25 @@ import BookList from "./components/book/BookList";
 /**
  * This is a context that can be used to determine if dark mode is enabled or not.
  */
-export const DarkModeContext = createContext<boolean>(false);
+export const DarkModeContext = createContext<{
+    isDarkModeEnabled: boolean;
+    toggleDarkMode: () => void;
+}>({
+    isDarkModeEnabled: false,
+    toggleDarkMode: () => {},
+});
 
 function App() {
     const [isDarkModeEnabled, setIsDarkModeEnabled] = useState(false);
     return (
         // We're passing in the current value of the dark mode to the context provider,
         // so that all child components can access it.
-        <DarkModeContext.Provider value={isDarkModeEnabled}>
+        <DarkModeContext.Provider
+            value={{
+                isDarkModeEnabled,
+                toggleDarkMode: () => setIsDarkModeEnabled(!isDarkModeEnabled),
+            }}
+        >
             <div className="App" style={{ background: isDarkModeEnabled ? "black" : "white", padding: 10 }}>
                 <div
                     style={{
@@ -21,7 +32,6 @@ function App() {
                         alignItems: "center",
                     }}
                 >
-                    <button onClick={() => setIsDarkModeEnabled(!isDarkModeEnabled)}>Switch Mode</button>
                     <BookList />
                 </div>
             </div>
