@@ -1,11 +1,13 @@
-# Fancy Headline
+# Cap React Training Exercises
 
-## Getting started with React & Vite
-* run ``yarn create vite``
-* when prompted, enter a project name
-* chose 'react' as framework and 'react-ts' as variant
+## Instructions
 
-## Compile Project
-* navgiate to you project's name folder
-* run ``yarn install`` to install all basic node_modules
-* run ``yarn dev``to compile your app, it will open on http://localhost:3000/ by default
+Please checkout this repository, install all dependencies and start the project:
+
+```sh
+# Install all dependencies
+$ yarn
+# Start project
+$ yarn dev
+# Now go to localhost:3000 and check if everything is working as expected
+```
