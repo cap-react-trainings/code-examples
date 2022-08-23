@@ -1,7 +1,7 @@
-import { Book } from "../../testData/books";
+import { BookData } from "../../testData/books";
 
 interface Props {
-  book: Book;
+  book: BookData;
 }
 
 const BookItem: React.FC<Props> = ({ book }: Props) => {
@@ -22,9 +22,9 @@ const BookItem: React.FC<Props> = ({ book }: Props) => {
         }}
       >
         <h2>{book.title}</h2>
-        <p>Author: {book.author}</p>
+        <p>Subtitle: {book.subtitle}</p>
         <p style={{ marginBottom: 2, color: "#757575", fontSize: "12px" }}>
-          release date: {book.releaseDate}
+          price: {book.price}
         </p>
       </div>
     </div>
