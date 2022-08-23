@@ -1,38 +1,35 @@
-export interface Book {
-  id: number;
+export interface BookData {
   title: string;
-  author: string;
-  releaseDate: string;
-  inStore: boolean;
+  subtitle: string;
+  isbn13: string;
+  price: string;
+  image: string;
+  url: string;
 }
 
-export const books: Book[] = [
+export const books: BookData[] = [
   {
-    id: 1,
-    title: "Moby Dick",
-    author: "Herman Melville",
-    releaseDate: "1851",
-    inStore: true,
+    title: "Deno Succinctly",
+    subtitle: "this is a subtitle",
+    isbn13: "9781642002140",
+    price: "$0.00",
+    image: "https://itbook.store/img/books/9781642002140.png",
+    url: "https://itbook.store/books/9781642002140",
   },
   {
-    id: 2,
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
-    releaseDate: "1925",
-    inStore: false,
+    title: "Robotics, AI, and Humanity",
+    subtitle: "Science, Ethics, and Policy",
+    isbn13: "9783030541729",
+    price: "$59.99",
+    image: "https://itbook.store/img/books/9783030541729.png",
+    url: "https://itbook.store/books/9783030541729",
   },
   {
-    id: 3,
-    title: "The Hobbit",
-    author: "J. R. R. Tolkien",
-    releaseDate: "1937",
-    inStore: true,
-  },
-  {
-    id: 4,
-    title: "Harry Potter and the Sorcerer's Stone",
-    author: "J. K. Rowling",
-    releaseDate: "1997",
-    inStore: true,
+    title: "Introduction to Autonomous Robots, 3rd Edition",
+    subtitle: "this is another subtitle",
+    isbn13: "9781493773077",
+    price: "$20.99",
+    image: "https://itbook.store/img/books/9781493773077.png",
+    url: "https://itbook.store/books/9781493773077",
   },
 ];

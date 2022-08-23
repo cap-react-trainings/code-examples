@@ -21,7 +21,9 @@ function App() {
         <div>
           <h1>Booklist</h1>
           {!!books.length ? (
-            books.map((book, index) => <BookItem book={book} key={index} />)
+            books.map((book, index) => (
+              <BookItem book={book} key={index} inStore={index % 2 === 0} />
+            ))
           ) : (
             <p>no books available 😢 </p>
           )}

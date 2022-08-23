@@ -1,10 +1,11 @@
-import { Book } from "../../testData/Booklist";
+import { BookData } from "../../testData/Booklist";
 
 interface Props {
-  book: Book;
+  book: BookData;
+  inStore: boolean;
 }
 
-const BookItem: React.FC<Props> = ({ book }: Props) => {
+const BookItem: React.FC<Props> = ({ book, inStore }: Props) => {
   return (
     <div
       style={{
@@ -22,12 +23,12 @@ const BookItem: React.FC<Props> = ({ book }: Props) => {
         }}
       >
         <h2>{book.title}</h2>
-        <p>Author: {book.author}</p>
+        <p>Subtitle: {book.subtitle}</p>
         <p style={{ marginBottom: 2, color: "#757575", fontSize: "12px" }}>
-          release date: {book.releaseDate}
+          price: {book.price}
         </p>
       </div>
-      {!book.inStore && (
+      {!inStore && (
         <div
           style={{
             backgroundColor: "#ef5350",
