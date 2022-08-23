@@ -29,7 +29,9 @@ function App() {
           {!!books.length ? (
             books
               .slice(0, selectedNumberOfBooks)
-              .map((book, index) => <BookItem book={book} key={index} />)
+              .map((book, index) => (
+                <BookItem book={book} key={index} inStore={index % 2 === 0} />
+              ))
           ) : (
             <p>no books available 😢 </p>
           )}
