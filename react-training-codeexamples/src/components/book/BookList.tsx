@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
-import BookSlider from "../slider/BookSlider";
 import BookItem from "./Book";
 import CreateBook from "./CreateBook";
 
@@ -14,8 +12,26 @@ export interface Book {
   url: string;
 }
 
+interface ButtonProps {
+  displayNumber: number;
+  onClick: (val: number) => void;
+  active: boolean;
+}
+
+const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+  return (
+    <button
+      className={`numberButton ${props.active ? "active" : ""}`}
+      onClick={() => props.onClick(props.displayNumber)}
+    >
+      {props.displayNumber}
+    </button>
+  );
+};
+
 const BookList: React.FC = () => {
   const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
+  const displayNumbers = [0, 1, 3];
   const [loading, setLoading] = useState(true);
   const [showAddBook, setShowAddBook] = useState(false);
   const [books, setBooks] = useState<Book[]>([]);
@@ -52,18 +68,27 @@ const BookList: React.FC = () => {
         </button>
       </div>
       <div style={{ marginTop: 12 }}>
-        {showAddBook && <CreateBook onSave={addBook} />}
+        {showAddBook && (
+          <CreateBook onSave={addBook} onExit={() => setShowAddBook(false)} />
+        )}
         {!showAddBook && (
           <LoadingWrapper loading={loading}>
             {books?.length && (
               <>
                 <div style={{ marginTop: 2 }}>
-                  <BookSlider
-                    numberOfBooks={books.length}
-                    onSliderChange={(value: number) =>
-                      setSelectedNumberOfBooks(value)
-                    }
-                  />
+                  {displayNumbers.map((num) => (
+                    <NumberButton
+                      displayNumber={num}
+                      onClick={(val: number) => setSelectedNumberOfBooks(val)}
+                      active={num === selectedNumberOfBooks}
+                    />
+                  ))}
+                  <button
+                    className="numberButton"
+                    onClick={() => setSelectedNumberOfBooks(undefined)}
+                  >
+                    ⇠
+                  </button>
                 </div>
                 <div style={{ marginTop: 4 }}>
                   {books.slice(0, selectedNumberOfBooks).map((book, index) => (

@@ -4,6 +4,7 @@ import { Book } from "./BookList";
 
 interface Props {
   onSave: (newBook: Book) => any;
+  onExit: () => any;
 }
 
 const CreateBook: React.FC<Props> = (props: Props) => {
@@ -32,7 +33,18 @@ const CreateBook: React.FC<Props> = (props: Props) => {
           textAlign: "start",
         }}
       >
-        <Link to="/">go back</Link>
+        <button
+          onClick={props.onExit}
+          style={{
+            backgroundColor: "#e1f5fe",
+            borderRadius: 2,
+            padding: 8,
+            width: "fit-content",
+            fontSize: 16,
+          }}
+        >
+          go back
+        </button>
       </div>
       <h1 style={{ marginBottom: 12 }}>Create a new book</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
