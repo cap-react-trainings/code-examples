@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import BookItem from "./components/book/Book";
 import LoadingWrapper from "./components/loading-wrapper/LoadingWrapper";
-import BookSlider from "./components/slider/BookSlider";
 
 export interface Book {
   title: string;
@@ -13,9 +12,27 @@ export interface Book {
   url: string;
 }
 
+interface ButtonProps {
+  displayNumber: number;
+  onClick: (val: number) => void;
+  active: boolean;
+}
+
+const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+  return (
+    <button
+      className={`numberButton ${props.active ? "active" : ""}`}
+      onClick={() => props.onClick(props.displayNumber)}
+    >
+      {props.displayNumber}
+    </button>
+  );
+};
+
 function App() {
   const [books, setBooks] = useState<Book[]>();
   const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
+  const displayNumbers = [0, 1, 3];
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,12 +59,19 @@ function App() {
               {books && (
                 <>
                   <div style={{ marginTop: 2 }}>
-                    <BookSlider
-                      numberOfBooks={books.length}
-                      onSliderChange={(value: number) =>
-                        setSelectedNumberOfBooks(value)
-                      }
-                    />
+                    {displayNumbers.map((num) => (
+                      <NumberButton
+                        displayNumber={num}
+                        onClick={(val: number) => setSelectedNumberOfBooks(val)}
+                        active={num === selectedNumberOfBooks}
+                      />
+                    ))}
+                    <button
+                      className="numberButton"
+                      onClick={() => setSelectedNumberOfBooks(undefined)}
+                    >
+                      ⇠
+                    </button>
                   </div>
                   <div style={{ marginTop: 4 }}>
                     {books
