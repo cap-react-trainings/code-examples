@@ -1,13 +1,28 @@
 import { useState } from "react";
 import "./App.css";
 import BookItem from "./components/book/Book";
-import BookSlider from "./components/slider/BookSlider";
 import { books } from "./testData/Booklist";
 
-function App() {
-  const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState(
-    Math.round(books.length / 2)
+interface ButtonProps {
+  displayNumber: number;
+  onClick: (val: number) => void;
+  active: boolean;
+}
+
+const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+  return (
+    <button
+      className={`numberButton ${props.active ? "active" : ""}`}
+      onClick={() => props.onClick(props.displayNumber)}
+    >
+      {props.displayNumber}
+    </button>
   );
+};
+
+function App() {
+  const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState(3);
+  const displayNumbers = [0, 1, 3];
   return (
     <div className="App">
       <div
@@ -19,12 +34,13 @@ function App() {
         <div style={{ width: "50vw" }}>
           <h1 style={{ marginBottom: 12 }}>Booklist</h1>
           <div style={{ marginTop: 12 }}>
-            <BookSlider
-              numberOfBooks={books.length}
-              onSliderChange={(value: number) =>
-                setSelectedNumberOfBooks(value)
-              }
-            />
+            {displayNumbers.map((num) => (
+              <NumberButton
+                displayNumber={num}
+                onClick={(val: number) => setSelectedNumberOfBooks(val)}
+                active={num === selectedNumberOfBooks}
+              />
+            ))}
           </div>
           {!!books.length ? (
             books
