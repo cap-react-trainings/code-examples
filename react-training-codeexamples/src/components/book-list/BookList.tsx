@@ -4,15 +4,32 @@ import { useQuery } from "react-query";
 import { Book } from "../../App";
 import BookItem from "../book/Book";
 import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
-import BookSlider from "../slider/BookSlider";
+
+interface ButtonProps {
+  displayNumber: number;
+  onClick: (val: number) => void;
+  active: boolean;
+}
+
+const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+  return (
+    <button
+      className={`numberButton ${props.active ? "active" : ""}`}
+      onClick={() => props.onClick(props.displayNumber)}
+    >
+      {props.displayNumber}
+    </button>
+  );
+};
 
 const BookList: React.FC = () => {
-  const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
   const { isLoading, error, data } = useQuery("books", () =>
     fetch("https://api.itbook.store/1.0/new").then((response) =>
       response.json()
     )
   );
+  const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
+  const displayNumbers = [0, 1, 3];
 
   return (
     <Box
@@ -40,12 +57,19 @@ const BookList: React.FC = () => {
           {data && (
             <>
               <Box sx={{ mt: 2 }}>
-                <BookSlider
-                  numberOfBooks={(data.books as Book[]).length}
-                  onSliderChange={(value: number) =>
-                    setSelectedNumberOfBooks(value)
-                  }
-                />
+                {displayNumbers.map((num) => (
+                  <NumberButton
+                    displayNumber={num}
+                    onClick={(val: number) => setSelectedNumberOfBooks(val)}
+                    active={num === selectedNumberOfBooks}
+                  />
+                ))}
+                <button
+                  className="numberButton"
+                  onClick={() => setSelectedNumberOfBooks(undefined)}
+                >
+                  ⇠
+                </button>
               </Box>
               <Box sx={{ mt: 4 }}>
                 {(data.books as Book[])

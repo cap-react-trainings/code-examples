@@ -40,3 +40,21 @@
 button {
   font-size: calc(10px + 2vmin);
 }
+
+.numberButton {
+  margin: 0 6px;
+  background-color: unset;
+  border: 3px solid #0097a7;
+  color: #0097a7;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.numberButton.active {
+  background-color: #0097a7;
+  color: #fff;
+}
+
+.numberButton:hover {
+  background-color: #e0f7fa;
+}
