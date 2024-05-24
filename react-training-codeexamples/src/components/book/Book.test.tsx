@@ -22,13 +22,13 @@ const testDataExpensive = {
 };
 
 test("shows book with cheap badge", async () => {
-    render(<BookItem book={testDataCheap} />);
-    const badge = await screen.findByText("cheap");
-    expect(badge).toBeTruthy();
+  render(<BookItem book={testDataCheap} />);
+  const badge = await screen.findByText("cheap");
+  expect(badge).toBeInTheDocument();
 });
 
 test("shows book with cheap badge", async () => {
-    render(<BookItem book={testDataExpensive} />);
-    const badge = await screen.findByText("expensive");
-    expect(badge).toBeTruthy();
+  render(<BookItem book={testDataExpensive} />);
+  const badge = await screen.findByText("expensive");
+  expect(badge).toBeInTheDocument();
 });
