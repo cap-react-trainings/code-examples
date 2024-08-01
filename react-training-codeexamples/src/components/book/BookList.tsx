@@ -35,10 +35,20 @@ const BookList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [showAddBook, setShowAddBook] = useState(false);
   const [books, setBooks] = useState<Book[]>([]);
+  const [filterText, setFilterText] = useState<string>("");
+
   const addBook = (newBook: Book) => {
     setBooks([...books, newBook]);
     setShowAddBook(false);
   };
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterText(e.target.value);
+  };
+
+  const filteredBooks = books.filter(book =>
+    book.title.toLowerCase().includes(filterText.toLowerCase())
+  );
 
   useEffect(() => {
     fetch("https://api.itbook.store/1.0/new")
@@ -67,17 +77,27 @@ const BookList: React.FC = () => {
           add book
         </button>
       </div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 12 }}>
+        <input
+          type="text"
+          placeholder="Filter books by title"
+          value={filterText}
+          onChange={handleFilterChange}
+          style={{ padding: 8, fontSize: 16 }}
+        />
+      </div>
       <div style={{ marginTop: 12 }}>
         {showAddBook && (
           <CreateBook onSave={addBook} onExit={() => setShowAddBook(false)} />
         )}
         {!showAddBook && (
           <LoadingWrapper loading={loading}>
-            {books?.length && (
+            {filteredBooks.length ? (
               <>
                 <div style={{ marginTop: 2 }}>
                   {displayNumbers.map((num) => (
                     <NumberButton
+                      key={num}
                       displayNumber={num}
                       onClick={(val: number) => setSelectedNumberOfBooks(val)}
                       active={num === selectedNumberOfBooks}
@@ -91,13 +111,12 @@ const BookList: React.FC = () => {
                   </button>
                 </div>
                 <div style={{ marginTop: 4 }}>
-                  {books.slice(0, selectedNumberOfBooks).map((book, index) => (
+                  {filteredBooks.slice(0, selectedNumberOfBooks).map((book, index) => (
                     <BookItem book={book} key={index} />
                   ))}
                 </div>
               </>
-            )}
-            {!books.length && (
+            ) : (
               <div>
                 <p style={{ marginBottom: 4 }}>
                   Sorry, we couldn't find any books to display! 😞
