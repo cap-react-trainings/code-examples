@@ -13,17 +13,13 @@ const LoadingWrapper: React.FC<Props> = ({ children, loading }: Props) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
-          <Typography variant="caption" sx={{ mb: 4 }}>
+          <Typography variant='caption' sx={{ mb: 4 }}>
             data loading...
           </Typography>
-          <CircularProgress
-            size={80}
-            thickness={4.5}
-            sx={{ color: "#66bb6a" }}
-          />
+          <CircularProgress size={80} thickness={4.5} sx={{ color: "#66bb6a" }} />
         </Box>
       )}
       {!loading && children}
