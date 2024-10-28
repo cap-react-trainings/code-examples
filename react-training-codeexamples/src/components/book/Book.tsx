@@ -1,10 +1,11 @@
+import { FunctionComponent } from "react";
 import { Book } from "./BookList";
 
 interface Props {
     book: Book;
 }
 
-const BookItem: React.FC<Props> = ({ book }: Props) => {
+const BookItem: FunctionComponent<Props> = ({ book }: Props) => {
     const isCheap = parseFloat(book.price.substring(1, book.price.length)) < 30;
     return (
         <div
