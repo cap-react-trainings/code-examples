@@ -1,11 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import { Book } from "../../testData/Booklist";
+import { FunctionComponent } from "react";
 
 interface Props {
   book: Book;
 }
 
-const BookItem: React.FC<Props> = ({ book }: Props) => {
+const BookItem: FunctionComponent<Props> = ({ book }: Props) => {
   /**
    * styling can be ignored for the moment, will be covered later on
    */
