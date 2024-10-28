@@ -1,3 +1,4 @@
+import { FunctionComponent } from "react";
 import { BookData } from "../../testData/Booklist";
 
 interface Props {
@@ -5,7 +6,7 @@ interface Props {
   inStore: boolean;
 }
 
-const BookItem: React.FC<Props> = ({ book, inStore }: Props) => {
+const BookItem: FunctionComponent<Props> = ({ book, inStore }: Props) => {
   return (
     <div
       style={{
