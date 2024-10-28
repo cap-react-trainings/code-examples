@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import "./App.css";
 import BookItem from "./components/book/Book";
 import LoadingWrapper from "./components/loading-wrapper/LoadingWrapper";
@@ -18,7 +18,7 @@ interface ButtonProps {
   active: boolean;
 }
 
-const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+const NumberButton: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
   return (
     <button
       className={`numberButton ${props.active ? "active" : ""}`}
@@ -44,6 +44,7 @@ function App() {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, []);
+  
   return (
     <div className="App">
       <div
