@@ -1,3 +1,4 @@
+import { FunctionComponent } from "react";
 import { Book } from "../../testData/Booklist";
 import styled from "styled-components";
 
@@ -38,7 +39,7 @@ const StyledLabel = styled.div`
  * hint: take a look at the class names in dev tools
  */
 
-const BookItem: React.FC<Props> = ({ book }: Props) => {
+const BookItem: FunctionComponent<Props> = ({ book }: Props) => {
   /**
    * styling can be ignored for the moment, will be covered later on
    */
