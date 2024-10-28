@@ -1,10 +1,11 @@
+import { FunctionComponent } from "react";
 import { BookData } from "../../testData/books";
 
 interface Props {
   book: BookData;
 }
 
-const BookItem: React.FC<Props> = ({ book }: Props) => {
+const BookItem: FunctionComponent<Props> = ({ book }: Props) => {
   return (
     <div
       style={{
