@@ -1,11 +1,12 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
+import { FunctionComponent } from "react";
 
 interface Props {
   children: React.ReactNode;
   loading: boolean;
 }
 
-const LoadingWrapper: React.FC<Props> = ({ children, loading }: Props) => {
+const LoadingWrapper: FunctionComponent<Props> = ({ children, loading }: Props) => {
   return (
     <>
       {loading && (

@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import { Book } from "./BookList";
+import { FunctionComponent } from "react";
 
 interface Props {
   onSave: (newBook: Book) => any;
   onExit: () => any;
 }
 
-const CreateBook: React.FC<Props> = (props: Props) => {
+const CreateBook: FunctionComponent<Props> = (props: Props) => {
   const {
     register,
     handleSubmit,
