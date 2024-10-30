@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
 
@@ -20,7 +20,7 @@ export interface BookDetails {
     url: string;
 }
 
-const BookDetail: React.FC = () => {
+const BookDetail: FunctionComponent = () => {
     // Get book id from url
     const { id } = useParams();
     const [book, setBook] = useState<BookDetails>();
