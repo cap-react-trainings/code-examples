@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { useQuery } from "react-query";
 import { Book } from "../../App";
 import BookItem from "../book/Book";
@@ -11,7 +11,7 @@ interface ButtonProps {
   active: boolean;
 }
 
-const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+const NumberButton: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
   return (
     <button
       className={`numberButton ${props.active ? "active" : ""}`}
@@ -22,7 +22,7 @@ const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
   );
 };
 
-const BookList: React.FC = () => {
+const BookList: FunctionComponent = () => {
   const { isLoading, error, data } = useQuery("books", () =>
     fetch("https://api.itbook.store/1.0/new").then((response) =>
       response.json()
