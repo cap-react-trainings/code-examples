@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
 import BookItem from "./Book";
 import CreateBook from "./CreateBook";
@@ -18,7 +18,7 @@ interface ButtonProps {
   active: boolean;
 }
 
-const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+const NumberButton: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
   return (
     <button
       className={`numberButton ${props.active ? "active" : ""}`}
@@ -29,7 +29,7 @@ const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
   );
 };
 
-const BookList: React.FC = () => {
+const BookList = () => {
   const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
   const displayNumbers = [0, 1, 3];
   const [loading, setLoading] = useState(true);

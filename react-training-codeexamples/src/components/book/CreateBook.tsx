@@ -7,7 +7,7 @@ interface Props {
   onExit: () => any;
 }
 
-const CreateBook: React.FC<Props> = (props: Props) => {
+const CreateBook = (props: Props) => {
   const {
     register,
     handleSubmit,

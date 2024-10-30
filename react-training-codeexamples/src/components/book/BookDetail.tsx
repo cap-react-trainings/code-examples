@@ -20,7 +20,7 @@ export interface BookDetails {
     url: string;
 }
 
-const BookDetail: React.FC = () => {
+const BookDetail = () => {
     // Get book id from url
     const { id } = useParams();
     const [book, setBook] = useState<BookDetails>();

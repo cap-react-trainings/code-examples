@@ -5,7 +5,7 @@ interface Props {
   loading: boolean;
 }
 
-const LoadingWrapper: React.FC<Props> = ({ children, loading }: Props) => {
+const LoadingWrapper = ({ children, loading }: Props) => {
   return (
     <>
       {loading && (
