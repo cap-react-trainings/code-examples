@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "../../App";
 import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
 import BookItem from "./Book";
@@ -9,7 +9,7 @@ interface ButtonProps {
   active: boolean;
 }
 
-const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+const NumberButton: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
   return (
     <button
       className={`numberButton ${props.active ? "active" : ""}`}
@@ -29,7 +29,7 @@ export interface Book {
   url: string;
 }
 
-const BookList: React.FC = () => {
+const BookList: FunctionComponent = () => {
   const { isDarkModeEnabled, toggleDarkMode } = useContext(DarkModeContext);
   const [books, setBooks] = useState<Book[]>();
   const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
