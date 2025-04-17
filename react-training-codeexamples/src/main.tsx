@@ -1,18 +1,29 @@
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-import BookDetail, { loader as bookLoader, ErrorBoundary } from "./components/book/BookDetail";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import BookDetail, { bookLoader, ErrorBoundary } from "./components/book/BookDetail";
 import BookList from "./components/book/BookList";
 import React from "react";
 import "./App.css";
+import Layout from "./components/layout/Layout";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path='/' element={<BookList />}></Route>
-      <Route path='/detail/:id' element={<BookDetail />} loader={bookLoader} errorElement={<ErrorBoundary />}></Route>
-    </>
-  )
-);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <BookList />
+      },
+      {
+        path: "/detail/:id",
+        element: <BookDetail />,
+        loader: bookLoader,
+        errorElement: <ErrorBoundary />
+      }
+    ]
+  }
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

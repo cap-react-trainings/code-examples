@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useLoaderData, useParams, useRouteError } from "react-router-dom";
+import React, { Suspense, useEffect, useState } from "react";
+import { Await, LoaderFunctionArgs, useLoaderData, useNavigation, useParams, useRouteError } from "react-router-dom";
 import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
 
 export interface BookDetails {
@@ -20,8 +20,20 @@ export interface BookDetails {
   url: string;
 }
 
-export const loader = ({ params }) => {
-  return fetch("https://api.itbook.store/1.0/books/" + params.id);
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export const bookLoader = async ({ params }: LoaderFunctionArgs) => {
+  // request künstlich verlangsamen, sodass loading spinner angezeigt wird
+  await delay(2000);
+
+  const res = await fetch("https://api.itbook.store/1.0/books/" + params.id);
+  if (!res.ok) {
+    throw new Response("Book not found", { status: res.status });
+  }
+  const book = (await res.json()) as BookDetails;
+  return { book };
 };
 
 export const ErrorBoundary = () => {
@@ -31,17 +43,10 @@ export const ErrorBoundary = () => {
 };
 
 const BookDetail = () => {
-  const [book, setBook] = useState<BookDetails>();
-  const [loading, setLoading] = useState(true);
-  const loaderData = useLoaderData();
-
-  useEffect(() => {
-    setBook(loaderData);
-    setLoading(false);
-  }, [loaderData]);
+  const { book } = useLoaderData<typeof bookLoader>();
 
   return (
-    <LoadingWrapper loading={loading}>
+    <>
       {book && (
         <div style={{ margin: 10 }}>
           <h1>{book?.title}</h1>
@@ -61,7 +66,7 @@ const BookDetail = () => {
           </div>
         </div>
       )}
-    </LoadingWrapper>
+    </>
   );
 };
 

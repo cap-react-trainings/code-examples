@@ -49,8 +49,9 @@ const BookList: React.FC = () => {
           {books && (
             <>
               <div style={{ marginTop: 2 }}>
-                {displayNumbers.map(num => (
+                {displayNumbers.map((num, index) => (
                   <NumberButton
+                    key={index}
                     displayNumber={num}
                     onClick={(val: number) => setSelectedNumberOfBooks(val)}
                     active={num === selectedNumberOfBooks}
