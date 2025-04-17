@@ -3,6 +3,20 @@ import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
 import BookItem from "./Book";
 import CreateBook from "./CreateBook";
 
+interface ButtonProps {
+  displayNumber: number;
+  onClick: (val: number) => void;
+  active: boolean;
+}
+
+const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
+  return (
+    <button className={`numberButton ${props.active ? "active" : ""}`} onClick={() => props.onClick(props.displayNumber)}>
+      {props.displayNumber}
+    </button>
+  );
+};
+
 export interface Book {
   title: string;
   subtitle: string;
@@ -12,29 +26,13 @@ export interface Book {
   url: string;
 }
 
-interface ButtonProps {
-  displayNumber: number;
-  onClick: (val: number) => void;
-  active: boolean;
-}
-
-const NumberButton: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
-  return (
-    <button
-      className={`numberButton ${props.active ? "active" : ""}`}
-      onClick={() => props.onClick(props.displayNumber)}
-    >
-      {props.displayNumber}
-    </button>
-  );
-};
-
-const BookList: FunctionComponent = () => {
+const BookList: React.FC = () => {
+  const [books, setBooks] = useState<Book[]>([]);
   const [selectedNumberOfBooks, setSelectedNumberOfBooks] = useState<number>();
   const displayNumbers = [0, 1, 3];
   const [loading, setLoading] = useState(true);
   const [showAddBook, setShowAddBook] = useState(false);
-  const [books, setBooks] = useState<Book[]>([]);
+
   const addBook = (newBook: Book) => {
     setBooks([...books, newBook]);
     setShowAddBook(false);
@@ -42,11 +40,11 @@ const BookList: FunctionComponent = () => {
 
   useEffect(() => {
     fetch("https://api.itbook.store/1.0/new")
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         setBooks(data.books);
       })
-      .catch((error) => console.error(error))
+      .catch(error => console.error(error))
       .finally(() => setLoading(false));
   }, []);
 
@@ -60,7 +58,7 @@ const BookList: FunctionComponent = () => {
             borderRadius: 2,
             padding: 8,
             width: "fit-content",
-            fontSize: 16,
+            fontSize: 16
           }}
           onClick={() => setShowAddBook(true)}
         >
@@ -68,25 +66,21 @@ const BookList: FunctionComponent = () => {
         </button>
       </div>
       <div style={{ marginTop: 12 }}>
-        {showAddBook && (
-          <CreateBook onSave={addBook} onExit={() => setShowAddBook(false)} />
-        )}
+        {showAddBook && <CreateBook onSave={addBook} onExit={() => setShowAddBook(false)} />}
         {!showAddBook && (
           <LoadingWrapper loading={loading}>
-            {books?.length && (
+            {books && (
               <>
                 <div style={{ marginTop: 2 }}>
-                  {displayNumbers.map((num) => (
+                  {displayNumbers.map((num, index) => (
                     <NumberButton
+                      key={index}
                       displayNumber={num}
                       onClick={(val: number) => setSelectedNumberOfBooks(val)}
                       active={num === selectedNumberOfBooks}
                     />
                   ))}
-                  <button
-                    className="numberButton"
-                    onClick={() => setSelectedNumberOfBooks(undefined)}
-                  >
+                  <button className='numberButton' onClick={() => setSelectedNumberOfBooks(undefined)}>
                     ⇠
                   </button>
                 </div>
@@ -97,11 +91,9 @@ const BookList: FunctionComponent = () => {
                 </div>
               </>
             )}
-            {!books.length && (
+            {!books && (
               <div>
-                <p style={{ marginBottom: 4 }}>
-                  Sorry, we couldn't find any books to display! 😞
-                </p>
+                <p style={{ marginBottom: 4 }}>Sorry, we couldn't find any books to display! 😞</p>
               </div>
             )}
           </LoadingWrapper>
