@@ -1,6 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { Await, LoaderFunctionArgs, useLoaderData, useNavigation, useParams, useRouteError } from "react-router-dom";
-import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
+import { LoaderFunctionArgs, useLoaderData, useRouteError } from "react-router-dom";
 
 export interface BookDetails {
   error: string;
