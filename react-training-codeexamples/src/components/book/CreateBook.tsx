@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { Book } from "./BookList";
+import { FunctionComponent } from "react";
 
 interface Props {
   onSave: (newBook: Book) => any;
   onExit: () => any;
 }
 
-const CreateBook = (props: Props) => {
+const CreateBook: FunctionComponent<Props> = (props: Props) => {
   const {
     register,
     handleSubmit,
@@ -30,18 +30,18 @@ const CreateBook = (props: Props) => {
       <div
         style={{
           marginTop: 16,
-          textAlign: "start",
+          textAlign: "start"
         }}
       >
         <button
-          onClick={props.onExit}
           style={{
             backgroundColor: "#e1f5fe",
             borderRadius: 2,
             padding: 8,
             width: "fit-content",
-            fontSize: 16,
+            fontSize: 16
           }}
+          onClick={props.onExit}
         >
           go back
         </button>
@@ -52,7 +52,7 @@ const CreateBook = (props: Props) => {
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           <div
@@ -60,100 +60,80 @@ const CreateBook = (props: Props) => {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              marginBottom: 24,
+              marginBottom: 24
             }}
           >
-            <label htmlFor="title">Title:</label>
-            <input
-              id="title"
-              {...register("title", { required: "Please enter a title" })}
-              style={{ width: 400 }}
-            />
-            {errors.title && <span>{errors.title.message}</span>}
+            <label htmlFor='title'>Title:</label>
+            <input id='title' {...register("title", { required: "Please enter a title" })} style={{ width: 400 }} />
+            {errors.title && <span style={{ color: "#ff9e22" }}>{errors.title.message}</span>}
           </div>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              marginBottom: 24,
+              marginBottom: 24
             }}
           >
-            <label htmlFor="subtitle">Subtitle:</label>
+            <label htmlFor='subtitle'>Subtitle:</label>
             <input
-              id="subtitle"
+              id='subtitle'
               style={{ width: 400 }}
               {...register("subtitle", {
-                required: "Please enter a sub-title",
+                required: "Please enter a sub-title"
               })}
             />
-            {errors.subtitle && <span>{errors.subtitle.message}</span>}
+            {errors.subtitle && <span style={{ color: "#ff9e22" }}>{errors.subtitle.message}</span>}
           </div>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              marginBottom: 24,
+              marginBottom: 24
             }}
           >
-            <label htmlFor="isbn">ISBN:</label>
-            <input
-              id="isbn"
-              {...register("isbn13", { required: "Please enter an ISBN-Code" })}
-              style={{ width: 400 }}
-            />
-            {errors.isbn13 && <span>{errors.isbn13.message}</span>}
+            <label htmlFor='isbn'>ISBN:</label>
+            <input id='isbn' {...register("isbn13", { required: "Please enter an ISBN-Code" })} style={{ width: 400 }} />
+            {errors.isbn13 && <span style={{ color: "#ff9e22" }}>{errors.isbn13.message}</span>}
           </div>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              marginBottom: 24,
+              marginBottom: 24
             }}
           >
-            <label htmlFor="price">Price:</label>
-            <input
-              id="price"
-              {...register("price", { required: "Please enter a price" })}
-              style={{ width: 400 }}
-            />
-            {errors.price && <span>{errors.price.message}</span>}
+            <label htmlFor='price'>Price:</label>
+            <input id='price' {...register("price", { required: "Please enter a price" })} style={{ width: 400 }} />
+            {errors.price && <span style={{ color: "#ff9e22" }}>{errors.price.message}</span>}
           </div>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              marginBottom: 24,
+              marginBottom: 24
             }}
           >
-            <label htmlFor="image">Image:</label>
-            <input
-              id="image"
-              {...register("image", { required: "Please enter an image URL" })}
-              style={{ width: 400 }}
-            />
-            {errors.image && <span>{errors.image.message}</span>}
+            <label htmlFor='image'>Image:</label>
+            <input id='image' {...register("image", { required: "Please enter an image URL" })} style={{ width: 400 }} />
+            {errors.image && <span style={{ color: "#ff9e22" }}>{errors.image.message}</span>}
           </div>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              marginBottom: 24,
+              marginBottom: 24
             }}
           >
-            <label htmlFor="url">URL:</label>
-            <input
-              id="url"
-              {...register("url", { required: "Please enter a title" })}
-              style={{ width: 400 }}
-            />
-            {errors.image && <span>{errors.image.message}</span>}
+            <label htmlFor='url'>URL:</label>
+            <input id='url' {...register("url", { required: "Please enter a title" })} style={{ width: 400 }} />
+            {errors.image && <span style={{ color: "#ff9e22" }}>{errors.image.message}</span>}
           </div>
-          <button type="submit" className="submit-button">
+          <button type='submit' className='submit-button'>
             save
           </button>
         </div>

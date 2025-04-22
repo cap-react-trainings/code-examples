@@ -1,15 +1,12 @@
 import { Box, CircularProgress, Typography } from "@mui/material";
-import { FunctionComponent } from "react";
+import { Outlet, useNavigation } from "react-router-dom";
 
-interface Props {
-  children: React.ReactNode;
-  loading: boolean;
-}
-
-const LoadingWrapper: FunctionComponent<Props> = ({ children, loading }: Props) => {
+export default function Layout() {
+  const navigation = useNavigation();
+  console.log("NAVIGATION STATE", navigation.state);
   return (
     <>
-      {loading && (
+      {navigation.state === "loading" && (
         <Box
           sx={{
             display: "flex",
@@ -23,9 +20,7 @@ const LoadingWrapper: FunctionComponent<Props> = ({ children, loading }: Props) 
           <CircularProgress size={80} thickness={4.5} sx={{ color: "#66bb6a" }} />
         </Box>
       )}
-      {!loading && children}
+      {navigation.state !== "loading" && <Outlet />}
     </>
   );
-};
-
-export default LoadingWrapper;
+}
