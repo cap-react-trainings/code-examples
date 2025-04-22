@@ -3,6 +3,12 @@ import LoadingWrapper from "../loading-wrapper/LoadingWrapper";
 import BookItem from "./Book";
 import CreateBook from "./CreateBook";
 
+interface ButtonProps {
+  displayNumber: number;
+  onClick: (val: number) => void;
+  active: boolean;
+}
+
 export interface Book {
   title: string;
   subtitle: string;
@@ -52,11 +58,11 @@ const BookList: React.FC = () => {
 
   useEffect(() => {
     fetch("https://api.itbook.store/1.0/new")
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         setBooks(data.books);
       })
-      .catch((error) => console.error(error))
+      .catch(error => console.error(error))
       .finally(() => setLoading(false));
   }, []);
 
@@ -70,7 +76,7 @@ const BookList: React.FC = () => {
             borderRadius: 2,
             padding: 8,
             width: "fit-content",
-            fontSize: 16,
+            fontSize: 16
           }}
           onClick={() => setShowAddBook(true)}
         >
@@ -118,9 +124,7 @@ const BookList: React.FC = () => {
               </>
             ) : (
               <div>
-                <p style={{ marginBottom: 4 }}>
-                  Sorry, we couldn't find any books to display! 😞
-                </p>
+                <p style={{ marginBottom: 4 }}>Sorry, we couldn't find any books to display! 😞</p>
               </div>
             )}
           </LoadingWrapper>
