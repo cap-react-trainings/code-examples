@@ -28,7 +28,7 @@ export const bookLoader = async ({ params }: LoaderFunctionArgs) => {
 
   const res = await fetch("https://api.itbook.store/1.0/books/" + params.id);
   if (!res.ok) {
-    throw new Response("Book not found", { status: res.status });
+    throw new Error("Book not found");
   }
   const book = (await res.json()) as BookDetails;
   return { book };
