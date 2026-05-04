@@ -25,17 +25,31 @@ const router = createBrowserRouter([
   }
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <div className='App'>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center"
-        }}
-      >
-        <RouterProvider router={router} />
+// Start MSW worker in development
+async function enableMocking() {
+  if (import.meta.env.DEV) {
+    const { worker } = await import('./mocks/browser')
+    
+    // Start the worker
+    return worker.start({
+      onUnhandledRequest: 'bypass', // Allow non-mocked requests to pass through
+    })
+  }
+}
+
+enableMocking().then(() => {
+  ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
+      <div className='App'>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center"
+          }}
+        >
+          <RouterProvider router={router} />
+        </div>
       </div>
-    </div>
-  </React.StrictMode>
-);
+    </React.StrictMode>
+  );
+})
