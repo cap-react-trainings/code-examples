@@ -2,6 +2,7 @@ import "./App.css";
 import BookItem from "./components/book/Book";
 // import { Book } from "./testData/Booklist";
 import { books } from "./testData/Booklist";
+import MSWTester from "./components/MSWTester";
 
 /**
  * in case you would like to test the rendered ui when the booklist is empty, uncomment the comments ;)
@@ -19,6 +20,7 @@ function App() {
         }}
       >
         <div>
+          {/* <MSWTester /> */}
           <h1>Booklist</h1>
           {!!books.length ? (
             books.map((book, index) => (
