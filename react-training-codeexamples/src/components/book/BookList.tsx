@@ -18,18 +18,9 @@ export interface Book {
   url: string;
 }
 
-interface ButtonProps {
-  displayNumber: number;
-  onClick: (val: number) => void;
-  active: boolean;
-}
-
 const NumberButton: React.FC<ButtonProps> = (props: ButtonProps) => {
   return (
-    <button
-      className={`numberButton ${props.active ? "active" : ""}`}
-      onClick={() => props.onClick(props.displayNumber)}
-    >
+    <button className={`numberButton ${props.active ? "active" : ""}`} onClick={() => props.onClick(props.displayNumber)}>
       {props.displayNumber}
     </button>
   );
@@ -52,9 +43,7 @@ const BookList: React.FC = () => {
     setFilterText(e.target.value);
   };
 
-  const filteredBooks = books.filter(book =>
-    book.title.toLowerCase().includes(filterText.toLowerCase())
-  );
+  const filteredBooks = books.filter(book => book.title.toLowerCase().includes(filterText.toLowerCase()));
 
   useEffect(() => {
     fetch("https://api.itbook.store/1.0/new")
@@ -85,23 +74,21 @@ const BookList: React.FC = () => {
       </div>
       <div style={{ display: "flex", justifyContent: "center", marginTop: 12 }}>
         <input
-          type="text"
-          placeholder="Filter books by title"
+          type='text'
+          placeholder='Filter books by title'
           value={filterText}
           onChange={handleFilterChange}
           style={{ padding: 8, fontSize: 16 }}
         />
       </div>
       <div style={{ marginTop: 12 }}>
-        {showAddBook && (
-          <CreateBook onSave={addBook} onExit={() => setShowAddBook(false)} />
-        )}
+        {showAddBook && <CreateBook onSave={addBook} onExit={() => setShowAddBook(false)} />}
         {!showAddBook && (
           <LoadingWrapper loading={loading}>
             {filteredBooks.length ? (
               <>
                 <div style={{ marginTop: 2 }}>
-                  {displayNumbers.map((num) => (
+                  {displayNumbers.map(num => (
                     <NumberButton
                       key={num}
                       displayNumber={num}
@@ -109,10 +96,7 @@ const BookList: React.FC = () => {
                       active={num === selectedNumberOfBooks}
                     />
                   ))}
-                  <button
-                    className="numberButton"
-                    onClick={() => setSelectedNumberOfBooks(undefined)}
-                  >
+                  <button className='numberButton' onClick={() => setSelectedNumberOfBooks(undefined)}>
                     ⇠
                   </button>
                 </div>

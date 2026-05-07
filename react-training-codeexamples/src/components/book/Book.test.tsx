@@ -1,8 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import BookItem from "./Book";
+import { expect, test } from "vitest";
+import { Book } from "./BookList";
 import { MemoryRouter } from "react-router-dom";
 
-const testDataCheap = {
+const testDataCheap: Book = {
   title: "title",
   subtitle: "subtitle",
   isbn13: "isbn13",
@@ -11,7 +13,7 @@ const testDataCheap = {
   url: "url"
 };
 
-const testDataExpensive = {
+const testDataExpensive: Book = {
   title: "title",
   subtitle: "subtitle",
   isbn13: "isbn13",
@@ -21,10 +23,6 @@ const testDataExpensive = {
 };
 
 test("shows book with cheap badge", async () => {
-  /**
-   * In der Testumgebung JSDOM exisitiert kein react-router-dom.
-   * Daher werden Komponente oder Hooks von react-router-dom nicht erkannt.
-   */
   render(
     <MemoryRouter>
       <BookItem book={testDataCheap} />

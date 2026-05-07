@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, useLoaderData,useRouteError } from "react-router-dom";
+import { LoaderFunctionArgs, useLoaderData, useRouteError } from "react-router-dom";
 
 export interface BookDetails {
   error: string;
